@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Text Summarizer</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <div class="container">
+      <h1 class="site-title">
+        <span aria-hidden="true">✦</span> Text Summarizer
+      </h1>
+      <p class="site-subtitle">Deep learning–powered summarization using a Seq2Seq model &middot; Best for articles, documents, and prose</p>
+    </div>
+  </header>
+
+  <main id="main-content" class="container" role="main">
+
+    <!-- Global error / info banner -->
+    <div
+      id="global-banner"
+      class="banner hidden"
+      role="alert"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+
+    <div class="card-grid">
+
+      <!-- ── INPUT CARD ─────────────────────────────────────────── -->
+      <section class="card" aria-labelledby="input-heading">
+        <h2 id="input-heading" class="card-heading">Input Text</h2>
+
+        <!-- File upload -->
+        <div class="upload-row">
+          <label for="file-upload" class="btn btn-secondary btn-sm">
+            <span aria-hidden="true">📎</span> Upload File
+          </label>
+          <input
+            id="file-upload"
+            type="file"
+            accept=".txt,.pdf"
+            class="visually-hidden"
+            aria-label="Upload a .txt or .pdf file"
+          />
+          <span id="file-name" class="file-name-label" aria-live="polite"></span>
+        </div>
+
+        <!-- Textarea -->
+        <div class="textarea-wrapper">
+          <label for="input-text" class="visually-hidden">Article text</label>
+          <textarea
+            id="input-text"
+            class="textarea"
+            placeholder="Paste or type your article, document, or prose here… (optimized for natural language text, not code)"
+            aria-describedby="char-count input-error"
+            aria-required="true"
+            spellcheck="true"
+          ></textarea>
+          <div id="input-error" class="field-error" role="alert" aria-live="assertive"></div>
+          <div id="char-count" class="char-count" aria-live="polite">0 / 10,000</div>
+        </div>
+
+        <!-- Controls row -->
+        <div class="controls-row">
+          <div class="length-group">
+            <label for="length-select" class="label">Summary length</label>
+            <select id="length-select" aria-label="Select summary length">
+              <option value="short">Short (1–2 sentences)</option>
+              <option value="medium" selected>Medium (3–5 sentences)</option>
+              <option value="long">Long (6–10 sentences)</option>
+            </select>
+          </div>
+
+          <div class="action-buttons">
+            <button
+              id="clear-btn"
+              type="button"
+              class="btn btn-ghost"
+              aria-label="Clear input and output"
+            >Clear</button>
+            <button
+              id="summarize-btn"
+              type="button"
+              class="btn btn-primary"
+              aria-label="Summarize text"
+            >
+              <span id="btn-label">Summarize</span>
+              <span id="btn-spinner" class="spinner hidden" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── OUTPUT CARD ────────────────────────────────────────── -->
+      <section
+        class="card"
+        aria-labelledby="output-heading"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <div class="output-header">
+          <h2 id="output-heading" class="card-heading">Summary</h2>
+          <span id="word-count" class="word-count" aria-live="polite"></span>
+        </div>
+
+        <div
+          id="output-area"
+          class="output-area"
+          role="region"
+          aria-label="Generated summary"
+          tabindex="0"
+        >
+          <p class="placeholder-text">Your summary will appear here.</p>
+        </div>
+
+        <div class="output-actions">
+          <button
+            id="copy-btn"
+            type="button"
+            class="btn btn-secondary btn-sm"
+            aria-label="Copy summary to clipboard"
+            disabled
+          >
+            <span aria-hidden="true">📋</span> Copy
+          </button>
+          <button
+            id="download-btn"
+            type="button"
+            class="btn btn-secondary btn-sm"
+            aria-label="Download summary as text file"
+            disabled
+          >
+            <span aria-hidden="true">⬇</span> Download
+          </button>
+          <span id="copy-toast" class="toast hidden" role="status" aria-live="polite">Copied!</span>
+        </div>
+      </section>
+
+    </div><!-- /.card-grid -->
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>Seq2Seq model trained on CNN/DailyMail &middot; GRU encoder-decoder with Bahdanau attention</p>
+    </div>
+  </footer>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
